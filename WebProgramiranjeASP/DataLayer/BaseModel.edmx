@@ -1,0 +1,579 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="BaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="aboutme">
+          <Key>
+            <PropertyRef Name="abId" />
+          </Key>
+          <Property Name="abId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="aboutTitle" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="aboutText" Type="text" Nullable="false" />
+          <Property Name="aboutFB" Type="text" Nullable="false" />
+          <Property Name="aboutInsta" Type="text" Nullable="false" />
+          <Property Name="aboutG" Type="text" Nullable="false" />
+          <Property Name="aboutOut" Type="text" Nullable="false" />
+        </EntityType>
+        <EntityType Name="comments">
+          <Key>
+            <PropertyRef Name="commentId" />
+          </Key>
+          <Property Name="commentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="commentText" Type="text" Nullable="false" />
+          <Property Name="commentDate" Type="date" Nullable="false" />
+          <Property Name="commentUser" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="first">
+          <Key>
+            <PropertyRef Name="fId" />
+          </Key>
+          <Property Name="fId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fTitle" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="fText" Type="text" Nullable="false" />
+        </EntityType>
+        <EntityType Name="function">
+          <Key>
+            <PropertyRef Name="functionId" />
+          </Key>
+          <Property Name="functionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="function_name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="gallery">
+          <Key>
+            <PropertyRef Name="galId" />
+          </Key>
+          <Property Name="galId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="galName" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="galImg" Type="text" Nullable="false" />
+        </EntityType>
+        <EntityType Name="home">
+          <Key>
+            <PropertyRef Name="homeId" />
+          </Key>
+          <Property Name="homeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="block_title" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="block_text" Type="text" Nullable="false" />
+        </EntityType>
+        <EntityType Name="navigation">
+          <Key>
+            <PropertyRef Name="IdNavigation" />
+          </Key>
+          <Property Name="IdNavigation" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="location" Type="text" Nullable="false" />
+        </EntityType>
+        <EntityType Name="seventh">
+          <Key>
+            <PropertyRef Name="seId" />
+          </Key>
+          <Property Name="seId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="seTitle" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="seText" Type="text" Nullable="false" />
+        </EntityType>
+        <EntityType Name="six">
+          <Key>
+            <PropertyRef Name="sId" />
+          </Key>
+          <Property Name="sId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sTitle" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="sText" Type="text" Nullable="false" />
+        </EntityType>
+        <EntityType Name="userFunction">
+          <Key>
+            <PropertyRef Name="ufId" />
+          </Key>
+          <Property Name="ufId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_user" Type="int" Nullable="false" />
+          <Property Name="id_function" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="userId" />
+          </Key>
+          <Property Name="userId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_name" Type="varchar" MaxLength="50" />
+          <Property Name="password" Type="varchar" MaxLength="50" />
+          <Property Name="mail" Type="varchar" MaxLength="70" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_userFunction_function">
+          <End Role="function" Type="Self.function" Multiplicity="1" />
+          <End Role="userFunction" Type="Self.userFunction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="function">
+              <PropertyRef Name="functionId" />
+            </Principal>
+            <Dependent Role="userFunction">
+              <PropertyRef Name="id_function" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_userFunction_users">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="userFunction" Type="Self.userFunction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="userFunction">
+              <PropertyRef Name="id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="AboutUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="title" Type="nvarchar" Mode="In" />
+          <Parameter Name="text" Type="text" Mode="In" />
+          <Parameter Name="fb" Type="nvarchar" Mode="In" />
+          <Parameter Name="insta" Type="nvarchar" Mode="In" />
+          <Parameter Name="plus" Type="nvarchar" Mode="In" />
+          <Parameter Name="mail" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="CommentDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idComment" Type="int" Mode="In" />
+        </Function>
+        <Function Name="CommentInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="text" Type="text" Mode="In" />
+          <Parameter Name="date" Type="date" Mode="In" />
+          <Parameter Name="user" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="FirstUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="title" Type="nvarchar" Mode="In" />
+          <Parameter Name="text" Type="text" Mode="In" />
+        </Function>
+        <Function Name="GalleryDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idGallery" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GalleryInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="name" Type="nvarchar" Mode="In" />
+          <Parameter Name="img" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="GalleryUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idGallery" Type="int" Mode="In" />
+          <Parameter Name="name" Type="nvarchar" Mode="In" />
+          <Parameter Name="img" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="HomeUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="title" Type="nvarchar" Mode="In" />
+          <Parameter Name="text" Type="text" Mode="In" />
+        </Function>
+        <Function Name="NavigationUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="name" Type="nvarchar" Mode="In" />
+          <Parameter Name="location" Type="text" Mode="In" />
+        </Function>
+        <Function Name="SeventhUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="title" Type="nvarchar" Mode="In" />
+          <Parameter Name="text" Type="text" Mode="In" />
+        </Function>
+        <Function Name="SixUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="title" Type="nvarchar" Mode="In" />
+          <Parameter Name="text" Type="text" Mode="In" />
+        </Function>
+        <Function Name="UserDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idUser" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UserInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="user" Type="nvarchar" Mode="In" />
+          <Parameter Name="password" Type="nvarchar" Mode="In" />
+          <Parameter Name="mail" Type="nvarchar" Mode="In" />
+          <Parameter Name="idFunction" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UserUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idUser" Type="int" Mode="In" />
+          <Parameter Name="user" Type="nvarchar" Mode="In" />
+          <Parameter Name="password" Type="nvarchar" Mode="In" />
+          <Parameter Name="mail" Type="nvarchar" Mode="In" />
+          <Parameter Name="idFunction" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="BaseModelStoreContainer">
+          <EntitySet Name="aboutme" EntityType="Self.aboutme" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="comments" EntityType="Self.comments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="first" EntityType="Self.first" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="function" EntityType="Self.function" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="gallery" EntityType="Self.gallery" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="home" EntityType="Self.home" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="navigation" EntityType="Self.navigation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="seventh" EntityType="Self.seventh" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="six" EntityType="Self.six" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="userFunction" EntityType="Self.userFunction" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_userFunction_function" Association="Self.FK_userFunction_function">
+            <End Role="function" EntitySet="function" />
+            <End Role="userFunction" EntitySet="userFunction" />
+          </AssociationSet>
+          <AssociationSet Name="FK_userFunction_users" Association="Self.FK_userFunction_users">
+            <End Role="users" EntitySet="users" />
+            <End Role="userFunction" EntitySet="userFunction" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="aboutme">
+          <Key>
+            <PropertyRef Name="abId" />
+          </Key>
+          <Property Name="abId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="aboutTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="aboutText" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="aboutFB" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="aboutInsta" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="aboutG" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="aboutOut" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="comment">
+          <Key>
+            <PropertyRef Name="commentId" />
+          </Key>
+          <Property Name="commentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="commentText" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="commentDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="commentUser" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="first">
+          <Key>
+            <PropertyRef Name="fId" />
+          </Key>
+          <Property Name="fId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fText" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="function">
+          <Key>
+            <PropertyRef Name="functionId" />
+          </Key>
+          <Property Name="functionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="function_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="userFunctions" Relationship="Self.FK_userFunction_function" FromRole="function" ToRole="userFunction" />
+        </EntityType>
+        <EntityType Name="gallery">
+          <Key>
+            <PropertyRef Name="galId" />
+          </Key>
+          <Property Name="galId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="galName" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="galImg" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="home">
+          <Key>
+            <PropertyRef Name="homeId" />
+          </Key>
+          <Property Name="homeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="block_title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="block_text" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="seventh">
+          <Key>
+            <PropertyRef Name="seId" />
+          </Key>
+          <Property Name="seId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="seTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="seText" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="six">
+          <Key>
+            <PropertyRef Name="sId" />
+          </Key>
+          <Property Name="sId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="sText" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="userFunction">
+          <Key>
+            <PropertyRef Name="ufId" />
+          </Key>
+          <Property Name="ufId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_user" Type="Int32" Nullable="false" />
+          <Property Name="id_function" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="function" Relationship="Self.FK_userFunction_function" FromRole="userFunction" ToRole="function" />
+          <NavigationProperty Name="user" Relationship="Self.FK_userFunction_users" FromRole="userFunction" ToRole="users" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="userId" />
+          </Key>
+          <Property Name="userId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="mail" Type="String" MaxLength="70" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="userFunctions" Relationship="Self.FK_userFunction_users" FromRole="users" ToRole="userFunction" />
+        </EntityType>
+        <Association Name="FK_userFunction_function">
+          <End Role="function" Type="Self.function" Multiplicity="1" />
+          <End Role="userFunction" Type="Self.userFunction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="function">
+              <PropertyRef Name="functionId" />
+            </Principal>
+            <Dependent Role="userFunction">
+              <PropertyRef Name="id_function" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_userFunction_users">
+          <End Role="users" Type="Self.user" Multiplicity="1" />
+          <End Role="userFunction" Type="Self.userFunction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="userFunction">
+              <PropertyRef Name="id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BaseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="aboutmes" EntityType="Self.aboutme" />
+          <EntitySet Name="comments" EntityType="Self.comment" />
+          <EntitySet Name="firsts" EntityType="Self.first" />
+          <EntitySet Name="functions" EntityType="Self.function" />
+          <EntitySet Name="galleries" EntityType="Self.gallery" />
+          <EntitySet Name="homes" EntityType="Self.home" />
+          <EntitySet Name="sevenths" EntityType="Self.seventh" />
+          <EntitySet Name="sixes" EntityType="Self.six" />
+          <EntitySet Name="userFunctions" EntityType="Self.userFunction" />
+          <EntitySet Name="users" EntityType="Self.user" />
+          <AssociationSet Name="FK_userFunction_function" Association="Self.FK_userFunction_function">
+            <End Role="function" EntitySet="functions" />
+            <End Role="userFunction" EntitySet="userFunctions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_userFunction_users" Association="Self.FK_userFunction_users">
+            <End Role="users" EntitySet="users" />
+            <End Role="userFunction" EntitySet="userFunctions" />
+          </AssociationSet>
+          <FunctionImport Name="AboutUpdate">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="title" Mode="In" Type="String" />
+            <Parameter Name="text" Mode="In" Type="String" />
+            <Parameter Name="fb" Mode="In" Type="String" />
+            <Parameter Name="insta" Mode="In" Type="String" />
+            <Parameter Name="plus" Mode="In" Type="String" />
+            <Parameter Name="mail" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="CommentDelete">
+          <Parameter Name="idComment" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="FirstUpdate">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="title" Mode="In" Type="String" />
+            <Parameter Name="text" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GalleryDelete">
+          <Parameter Name="idGallery" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GalleryInsert">
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="img" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GalleryUpdate">
+            <Parameter Name="idGallery" Mode="In" Type="Int32" />
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="img" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="HomeUpdate">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="title" Mode="In" Type="String" />
+            <Parameter Name="text" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SeventhUpdate">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="title" Mode="In" Type="String" />
+            <Parameter Name="text" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SixUpdate">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="title" Mode="In" Type="String" />
+            <Parameter Name="text" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="UserDelete">
+          <Parameter Name="idUser" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="UserInsert">
+            <Parameter Name="user" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="String" />
+            <Parameter Name="mail" Mode="In" Type="String" />
+            <Parameter Name="idFunction" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="UserUpdate">
+            <Parameter Name="idUser" Mode="In" Type="Int32" />
+            <Parameter Name="user" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="String" />
+            <Parameter Name="mail" Mode="In" Type="String" />
+            <Parameter Name="idFunction" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="navigations" EntityType="BaseModel.navigation" />
+          <FunctionImport Name="NavigationUpdate">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="location" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="CommentInsert">
+            <Parameter Name="text" Mode="In" Type="String" />
+            <Parameter Name="date" Mode="In" Type="DateTime" />
+            <Parameter Name="user" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <EntityType Name="navigation">
+          <Key>
+            <PropertyRef Name="IdNavigation" />
+          </Key>
+          <Property Name="IdNavigation" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="location" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BaseModelStoreContainer" CdmEntityContainer="BaseEntities">
+          <EntitySetMapping Name="aboutmes">
+            <EntityTypeMapping TypeName="BaseModel.aboutme">
+              <MappingFragment StoreEntitySet="aboutme">
+                <ScalarProperty Name="abId" ColumnName="abId" />
+                <ScalarProperty Name="aboutTitle" ColumnName="aboutTitle" />
+                <ScalarProperty Name="aboutText" ColumnName="aboutText" />
+                <ScalarProperty Name="aboutFB" ColumnName="aboutFB" />
+                <ScalarProperty Name="aboutInsta" ColumnName="aboutInsta" />
+                <ScalarProperty Name="aboutG" ColumnName="aboutG" />
+                <ScalarProperty Name="aboutOut" ColumnName="aboutOut" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="comments">
+            <EntityTypeMapping TypeName="BaseModel.comment">
+              <MappingFragment StoreEntitySet="comments">
+                <ScalarProperty Name="commentId" ColumnName="commentId" />
+                <ScalarProperty Name="commentText" ColumnName="commentText" />
+                <ScalarProperty Name="commentDate" ColumnName="commentDate" />
+                <ScalarProperty Name="commentUser" ColumnName="commentUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="firsts">
+            <EntityTypeMapping TypeName="BaseModel.first">
+              <MappingFragment StoreEntitySet="first">
+                <ScalarProperty Name="fId" ColumnName="fId" />
+                <ScalarProperty Name="fTitle" ColumnName="fTitle" />
+                <ScalarProperty Name="fText" ColumnName="fText" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="functions">
+            <EntityTypeMapping TypeName="BaseModel.function">
+              <MappingFragment StoreEntitySet="function">
+                <ScalarProperty Name="functionId" ColumnName="functionId" />
+                <ScalarProperty Name="function_name" ColumnName="function_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="galleries">
+            <EntityTypeMapping TypeName="BaseModel.gallery">
+              <MappingFragment StoreEntitySet="gallery">
+                <ScalarProperty Name="galId" ColumnName="galId" />
+                <ScalarProperty Name="galName" ColumnName="galName" />
+                <ScalarProperty Name="galImg" ColumnName="galImg" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="homes">
+            <EntityTypeMapping TypeName="BaseModel.home">
+              <MappingFragment StoreEntitySet="home">
+                <ScalarProperty Name="homeId" ColumnName="homeId" />
+                <ScalarProperty Name="block_title" ColumnName="block_title" />
+                <ScalarProperty Name="block_text" ColumnName="block_text" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sevenths">
+            <EntityTypeMapping TypeName="BaseModel.seventh">
+              <MappingFragment StoreEntitySet="seventh">
+                <ScalarProperty Name="seId" ColumnName="seId" />
+                <ScalarProperty Name="seTitle" ColumnName="seTitle" />
+                <ScalarProperty Name="seText" ColumnName="seText" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sixes">
+            <EntityTypeMapping TypeName="BaseModel.six">
+              <MappingFragment StoreEntitySet="six">
+                <ScalarProperty Name="sId" ColumnName="sId" />
+                <ScalarProperty Name="sTitle" ColumnName="sTitle" />
+                <ScalarProperty Name="sText" ColumnName="sText" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="userFunctions">
+            <EntityTypeMapping TypeName="BaseModel.userFunction">
+              <MappingFragment StoreEntitySet="userFunction">
+                <ScalarProperty Name="ufId" ColumnName="ufId" />
+                <ScalarProperty Name="id_user" ColumnName="id_user" />
+                <ScalarProperty Name="id_function" ColumnName="id_function" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="BaseModel.user">
+              <MappingFragment StoreEntitySet="users">
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="user_name" ColumnName="user_name" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="mail" ColumnName="mail" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="AboutUpdate" FunctionName="BaseModel.Store.AboutUpdate" />
+          <FunctionImportMapping FunctionImportName="CommentDelete" FunctionName="BaseModel.Store.CommentDelete" />
+          <FunctionImportMapping FunctionImportName="FirstUpdate" FunctionName="BaseModel.Store.FirstUpdate" />
+          <FunctionImportMapping FunctionImportName="GalleryDelete" FunctionName="BaseModel.Store.GalleryDelete" />
+          <FunctionImportMapping FunctionImportName="GalleryInsert" FunctionName="BaseModel.Store.GalleryInsert" />
+          <FunctionImportMapping FunctionImportName="GalleryUpdate" FunctionName="BaseModel.Store.GalleryUpdate" />
+          <FunctionImportMapping FunctionImportName="HomeUpdate" FunctionName="BaseModel.Store.HomeUpdate" />
+          <FunctionImportMapping FunctionImportName="SeventhUpdate" FunctionName="BaseModel.Store.SeventhUpdate" />
+          <FunctionImportMapping FunctionImportName="SixUpdate" FunctionName="BaseModel.Store.SixUpdate" />
+          <FunctionImportMapping FunctionImportName="UserDelete" FunctionName="BaseModel.Store.UserDelete" />
+          <FunctionImportMapping FunctionImportName="UserInsert" FunctionName="BaseModel.Store.UserInsert" />
+          <FunctionImportMapping FunctionImportName="UserUpdate" FunctionName="BaseModel.Store.UserUpdate" />
+          <EntitySetMapping Name="navigations">
+            <EntityTypeMapping TypeName="BaseModel.navigation">
+              <MappingFragment StoreEntitySet="navigation">
+                <ScalarProperty Name="location" ColumnName="location" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="IdNavigation" ColumnName="IdNavigation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="NavigationUpdate" FunctionName="BaseModel.Store.NavigationUpdate" />
+          <FunctionImportMapping FunctionImportName="CommentInsert" FunctionName="BaseModel.Store.CommentInsert" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

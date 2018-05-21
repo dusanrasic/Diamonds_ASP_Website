@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="BaseModelStoreContainer" CdmEntityContainer="BaseEntities">
+    <EntitySetMapping Name="aboutmes">
+      <EntityTypeMapping TypeName="BaseModel.aboutme">
+        <MappingFragment StoreEntitySet="aboutme">
+          <ScalarProperty Name="abId" ColumnName="abId" />
+          <ScalarProperty Name="aboutTitle" ColumnName="aboutTitle" />
+          <ScalarProperty Name="aboutText" ColumnName="aboutText" />
+          <ScalarProperty Name="aboutFB" ColumnName="aboutFB" />
+          <ScalarProperty Name="aboutInsta" ColumnName="aboutInsta" />
+          <ScalarProperty Name="aboutG" ColumnName="aboutG" />
+          <ScalarProperty Name="aboutOut" ColumnName="aboutOut" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="comments">
+      <EntityTypeMapping TypeName="BaseModel.comment">
+        <MappingFragment StoreEntitySet="comments">
+          <ScalarProperty Name="commentId" ColumnName="commentId" />
+          <ScalarProperty Name="commentText" ColumnName="commentText" />
+          <ScalarProperty Name="commentDate" ColumnName="commentDate" />
+          <ScalarProperty Name="commentUser" ColumnName="commentUser" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="firsts">
+      <EntityTypeMapping TypeName="BaseModel.first">
+        <MappingFragment StoreEntitySet="first">
+          <ScalarProperty Name="fId" ColumnName="fId" />
+          <ScalarProperty Name="fTitle" ColumnName="fTitle" />
+          <ScalarProperty Name="fText" ColumnName="fText" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="functions">
+      <EntityTypeMapping TypeName="BaseModel.function">
+        <MappingFragment StoreEntitySet="function">
+          <ScalarProperty Name="functionId" ColumnName="functionId" />
+          <ScalarProperty Name="function_name" ColumnName="function_name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="galleries">
+      <EntityTypeMapping TypeName="BaseModel.gallery">
+        <MappingFragment StoreEntitySet="gallery">
+          <ScalarProperty Name="galId" ColumnName="galId" />
+          <ScalarProperty Name="galName" ColumnName="galName" />
+          <ScalarProperty Name="galImg" ColumnName="galImg" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="homes">
+      <EntityTypeMapping TypeName="BaseModel.home">
+        <MappingFragment StoreEntitySet="home">
+          <ScalarProperty Name="homeId" ColumnName="homeId" />
+          <ScalarProperty Name="block_title" ColumnName="block_title" />
+          <ScalarProperty Name="block_text" ColumnName="block_text" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sevenths">
+      <EntityTypeMapping TypeName="BaseModel.seventh">
+        <MappingFragment StoreEntitySet="seventh">
+          <ScalarProperty Name="seId" ColumnName="seId" />
+          <ScalarProperty Name="seTitle" ColumnName="seTitle" />
+          <ScalarProperty Name="seText" ColumnName="seText" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sixes">
+      <EntityTypeMapping TypeName="BaseModel.six">
+        <MappingFragment StoreEntitySet="six">
+          <ScalarProperty Name="sId" ColumnName="sId" />
+          <ScalarProperty Name="sTitle" ColumnName="sTitle" />
+          <ScalarProperty Name="sText" ColumnName="sText" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="userFunctions">
+      <EntityTypeMapping TypeName="BaseModel.userFunction">
+        <MappingFragment StoreEntitySet="userFunction">
+          <ScalarProperty Name="ufId" ColumnName="ufId" />
+          <ScalarProperty Name="id_user" ColumnName="id_user" />
+          <ScalarProperty Name="id_function" ColumnName="id_function" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="users">
+      <EntityTypeMapping TypeName="BaseModel.user">
+        <MappingFragment StoreEntitySet="users">
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="user_name" ColumnName="user_name" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="mail" ColumnName="mail" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="AboutUpdate" FunctionName="BaseModel.Store.AboutUpdate" />
+    <FunctionImportMapping FunctionImportName="CommentDelete" FunctionName="BaseModel.Store.CommentDelete" />
+    <FunctionImportMapping FunctionImportName="FirstUpdate" FunctionName="BaseModel.Store.FirstUpdate" />
+    <FunctionImportMapping FunctionImportName="GalleryDelete" FunctionName="BaseModel.Store.GalleryDelete" />
+    <FunctionImportMapping FunctionImportName="GalleryInsert" FunctionName="BaseModel.Store.GalleryInsert" />
+    <FunctionImportMapping FunctionImportName="GalleryUpdate" FunctionName="BaseModel.Store.GalleryUpdate" />
+    <FunctionImportMapping FunctionImportName="HomeUpdate" FunctionName="BaseModel.Store.HomeUpdate" />
+    <FunctionImportMapping FunctionImportName="SeventhUpdate" FunctionName="BaseModel.Store.SeventhUpdate" />
+    <FunctionImportMapping FunctionImportName="SixUpdate" FunctionName="BaseModel.Store.SixUpdate" />
+    <FunctionImportMapping FunctionImportName="UserDelete" FunctionName="BaseModel.Store.UserDelete" />
+    <FunctionImportMapping FunctionImportName="UserInsert" FunctionName="BaseModel.Store.UserInsert" />
+    <FunctionImportMapping FunctionImportName="UserUpdate" FunctionName="BaseModel.Store.UserUpdate" />
+    <EntitySetMapping Name="navigations">
+      <EntityTypeMapping TypeName="BaseModel.navigation">
+        <MappingFragment StoreEntitySet="navigation">
+          <ScalarProperty Name="location" ColumnName="location" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="IdNavigation" ColumnName="IdNavigation" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="NavigationUpdate" FunctionName="BaseModel.Store.NavigationUpdate" />
+    <FunctionImportMapping FunctionImportName="CommentInsert" FunctionName="BaseModel.Store.CommentInsert" />
+  </EntityContainerMapping>
+</Mapping>

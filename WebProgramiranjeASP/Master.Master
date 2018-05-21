@@ -1,0 +1,63 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Master.master.cs" Inherits="WebProgramiranjeASP.Master" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title>Diamond</title>
+    <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon"/>
+    <meta charset="utf-8">
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <link href="style.css" rel="stylesheet" />
+    <script src="js/jquery-3.1.1.min.js"  type="text/javascript"></script>
+    <script src="js/jquery-migrate-1.2.1.js" type="text/javascript"></script>
+    <script src="js/form-script.js"  type="text/javascript"></script>
+    <script src="js/script.js"  type="text/javascript"></script>
+    <script src="js/nav_script.js" type="text/javascript"></script>
+    <script src="ResponsiveSlides.js-master/responsiveslides.min.js"></script>
+</head>
+  <body>
+    <section id="content">
+      <nav>
+        <div class="logo">
+          <p><a href="Index.aspx"><img src="img/favicon.png" alt="logo"></a></p>
+        </div>
+        <div class="menu">
+          <ul class="menu-nav" id="menu" runat="server">
+            <li><a href="Index.aspx">Home</a></li>
+         </ul>
+        </div>
+       </nav>
+           <asp:ContentPlaceHolder ID="contents" runat="server">
+
+           </asp:ContentPlaceHolder>
+
+          <div class="form-log" ID="formLogFooter" runat="server">
+	        <form method="post" name="form" id="formFooter" class="awesome-form3" runat="server">
+
+	        <div class="input-group3">
+                <asp:TextBox ID="username" Name="username" runat="server" />
+	          <label>Your User Name</label>
+	        </div>
+	        <div class="input-group3">
+               <asp:TextBox ID="password" Name="password" runat="server" />
+	          <label>Your Password</label>
+	        </div>
+                <asp:Button Name="btnLog" ID="btnLog" Text="LogIn" runat="server" OnClick="btnLog_Click" />
+	        </form>
+           </div>
+  </section>
+    <footer>
+      <div id="links">
+        <a href="Index.aspx">Home</a>
+        <a href="AdminPanel.aspx" id="linkAdminPanel" runat="server">AdminPanel</a>
+        <a href="LogOut.aspx" id="linkLogOut" runat="server">LogOut</a>
+      </div>
+<div id="log">
+    <input type="button" name="btnLog" class="btnLog">
+  </div>
+</footer>
+
+  </body>
+</html>

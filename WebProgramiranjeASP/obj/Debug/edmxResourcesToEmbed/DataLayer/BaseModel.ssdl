@@ -1,0 +1,211 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="aboutme">
+    <Key>
+      <PropertyRef Name="abId" />
+    </Key>
+    <Property Name="abId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="aboutTitle" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="aboutText" Type="text" Nullable="false" />
+    <Property Name="aboutFB" Type="text" Nullable="false" />
+    <Property Name="aboutInsta" Type="text" Nullable="false" />
+    <Property Name="aboutG" Type="text" Nullable="false" />
+    <Property Name="aboutOut" Type="text" Nullable="false" />
+  </EntityType>
+  <EntityType Name="comments">
+    <Key>
+      <PropertyRef Name="commentId" />
+    </Key>
+    <Property Name="commentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="commentText" Type="text" Nullable="false" />
+    <Property Name="commentDate" Type="date" Nullable="false" />
+    <Property Name="commentUser" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="first">
+    <Key>
+      <PropertyRef Name="fId" />
+    </Key>
+    <Property Name="fId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="fTitle" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="fText" Type="text" Nullable="false" />
+  </EntityType>
+  <EntityType Name="function">
+    <Key>
+      <PropertyRef Name="functionId" />
+    </Key>
+    <Property Name="functionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="function_name" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="gallery">
+    <Key>
+      <PropertyRef Name="galId" />
+    </Key>
+    <Property Name="galId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="galName" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="galImg" Type="text" Nullable="false" />
+  </EntityType>
+  <EntityType Name="home">
+    <Key>
+      <PropertyRef Name="homeId" />
+    </Key>
+    <Property Name="homeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="block_title" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="block_text" Type="text" Nullable="false" />
+  </EntityType>
+  <EntityType Name="navigation">
+    <Key>
+      <PropertyRef Name="IdNavigation" />
+    </Key>
+    <Property Name="IdNavigation" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="location" Type="text" Nullable="false" />
+  </EntityType>
+  <EntityType Name="seventh">
+    <Key>
+      <PropertyRef Name="seId" />
+    </Key>
+    <Property Name="seId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="seTitle" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="seText" Type="text" Nullable="false" />
+  </EntityType>
+  <EntityType Name="six">
+    <Key>
+      <PropertyRef Name="sId" />
+    </Key>
+    <Property Name="sId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="sTitle" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="sText" Type="text" Nullable="false" />
+  </EntityType>
+  <EntityType Name="userFunction">
+    <Key>
+      <PropertyRef Name="ufId" />
+    </Key>
+    <Property Name="ufId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_user" Type="int" Nullable="false" />
+    <Property Name="id_function" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="users">
+    <Key>
+      <PropertyRef Name="userId" />
+    </Key>
+    <Property Name="userId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="user_name" Type="varchar" MaxLength="50" />
+    <Property Name="password" Type="varchar" MaxLength="50" />
+    <Property Name="mail" Type="varchar" MaxLength="70" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_userFunction_function">
+    <End Role="function" Type="Self.function" Multiplicity="1" />
+    <End Role="userFunction" Type="Self.userFunction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="function">
+        <PropertyRef Name="functionId" />
+      </Principal>
+      <Dependent Role="userFunction">
+        <PropertyRef Name="id_function" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_userFunction_users">
+    <End Role="users" Type="Self.users" Multiplicity="1" />
+    <End Role="userFunction" Type="Self.userFunction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="userId" />
+      </Principal>
+      <Dependent Role="userFunction">
+        <PropertyRef Name="id_user" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="AboutUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+    <Parameter Name="title" Type="nvarchar" Mode="In" />
+    <Parameter Name="text" Type="text" Mode="In" />
+    <Parameter Name="fb" Type="nvarchar" Mode="In" />
+    <Parameter Name="insta" Type="nvarchar" Mode="In" />
+    <Parameter Name="plus" Type="nvarchar" Mode="In" />
+    <Parameter Name="mail" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="CommentDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idComment" Type="int" Mode="In" />
+  </Function>
+  <Function Name="CommentInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="text" Type="text" Mode="In" />
+    <Parameter Name="date" Type="date" Mode="In" />
+    <Parameter Name="user" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="FirstUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+    <Parameter Name="title" Type="nvarchar" Mode="In" />
+    <Parameter Name="text" Type="text" Mode="In" />
+  </Function>
+  <Function Name="GalleryDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idGallery" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GalleryInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="name" Type="nvarchar" Mode="In" />
+    <Parameter Name="img" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="GalleryUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idGallery" Type="int" Mode="In" />
+    <Parameter Name="name" Type="nvarchar" Mode="In" />
+    <Parameter Name="img" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="HomeUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+    <Parameter Name="title" Type="nvarchar" Mode="In" />
+    <Parameter Name="text" Type="text" Mode="In" />
+  </Function>
+  <Function Name="NavigationUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+    <Parameter Name="name" Type="nvarchar" Mode="In" />
+    <Parameter Name="location" Type="text" Mode="In" />
+  </Function>
+  <Function Name="SeventhUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+    <Parameter Name="title" Type="nvarchar" Mode="In" />
+    <Parameter Name="text" Type="text" Mode="In" />
+  </Function>
+  <Function Name="SixUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+    <Parameter Name="title" Type="nvarchar" Mode="In" />
+    <Parameter Name="text" Type="text" Mode="In" />
+  </Function>
+  <Function Name="UserDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idUser" Type="int" Mode="In" />
+  </Function>
+  <Function Name="UserInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="user" Type="nvarchar" Mode="In" />
+    <Parameter Name="password" Type="nvarchar" Mode="In" />
+    <Parameter Name="mail" Type="nvarchar" Mode="In" />
+    <Parameter Name="idFunction" Type="int" Mode="In" />
+  </Function>
+  <Function Name="UserUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idUser" Type="int" Mode="In" />
+    <Parameter Name="user" Type="nvarchar" Mode="In" />
+    <Parameter Name="password" Type="nvarchar" Mode="In" />
+    <Parameter Name="mail" Type="nvarchar" Mode="In" />
+    <Parameter Name="idFunction" Type="int" Mode="In" />
+  </Function>
+  <EntityContainer Name="BaseModelStoreContainer">
+    <EntitySet Name="aboutme" EntityType="Self.aboutme" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="comments" EntityType="Self.comments" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="first" EntityType="Self.first" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="function" EntityType="Self.function" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="gallery" EntityType="Self.gallery" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="home" EntityType="Self.home" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="navigation" EntityType="Self.navigation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="seventh" EntityType="Self.seventh" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="six" EntityType="Self.six" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="userFunction" EntityType="Self.userFunction" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_userFunction_function" Association="Self.FK_userFunction_function">
+      <End Role="function" EntitySet="function" />
+      <End Role="userFunction" EntitySet="userFunction" />
+    </AssociationSet>
+    <AssociationSet Name="FK_userFunction_users" Association="Self.FK_userFunction_users">
+      <End Role="users" EntitySet="users" />
+      <End Role="userFunction" EntitySet="userFunction" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
